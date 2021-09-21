@@ -1,12 +1,19 @@
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, Component } from 'react';
 
 import Users from './Users';
+import classes from './UserFinder.module.css';
 
 const DUMMY_USERS = [
   { id: 'u1', name: 'Max' },
   { id: 'u2', name: 'Manuel' },
   { id: 'u3', name: 'Julie' },
 ];
+
+class UserFinder extends Component {
+  constructor() {
+    this.state = {};
+  }
+}
 
 const UserFinder = () => {
   const [filteredUsers, setFilteredUsers] = useState(DUMMY_USERS);
