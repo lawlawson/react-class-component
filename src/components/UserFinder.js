@@ -17,6 +17,16 @@ class UserFinder extends Component {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchTerm !== this.state.searchTerm) {
+      this.setState({
+        filteredUsers: DUMMY_USERS.filter((user) =>
+          user.name.includes(this.state.searchTerm)
+        ),
+      });
+    }
+  }
+
   searchChangeHandler(event) {
     this.setState({ searchTerm: event.target.value });
   }
@@ -24,8 +34,8 @@ class UserFinder extends Component {
   render() {
     return (
       <Fragment>
-        <input type='search' onChange={searchChangeHandler} />
-        <Users users={filteredUsers} />
+        <input type='search' onChange={this.searchChangeHandler.bind(this)} />
+        <Users users={this.state.filteredUsers} />
       </Fragment>
     );
   }
