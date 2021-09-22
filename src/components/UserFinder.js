@@ -11,7 +11,23 @@ const DUMMY_USERS = [
 
 class UserFinder extends Component {
   constructor() {
-    this.state = {};
+    this.state = {
+      filteredUsers: DUMMY_USERS,
+      searchTerm: '',
+    };
+  }
+
+  searchChangeHandler(event) {
+    this.setState({ searchTerm: event.target.value });
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <input type='search' onChange={searchChangeHandler} />
+        <Users users={filteredUsers} />
+      </Fragment>
+    );
   }
 }
 
@@ -28,13 +44,6 @@ const UserFinder = () => {
   const searchChangeHandler = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  return (
-    <Fragment>
-      <input type='search' onChange={searchChangeHandler} />
-      <Users users={filteredUsers} />
-    </Fragment>
-  );
 };
 
 export default UserFinder;
