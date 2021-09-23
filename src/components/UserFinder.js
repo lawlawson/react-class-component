@@ -1,14 +1,9 @@
-import { Fragment, useState, useEffect, Component } from 'react';
+import { Fragment, Component } from 'react';
 
-import Users from './Users';
+// import Users from './Users';
 import classes from './UserFinder.module.css';
 import UsersContext from '../store/users-context';
-
-const DUMMY_USERS = [
-  { id: 'u1', name: 'Max' },
-  { id: 'u2', name: 'Manuel' },
-  { id: 'u3', name: 'Julie' },
-];
+// import ErrorBoundary from './ErrorBoundary';
 
 class UserFinder extends Component {
   static contextType = UsersContext;
@@ -16,13 +11,13 @@ class UserFinder extends Component {
   constructor() {
     super();
     this.state = {
-      filteredUsers: DUMMY_USERS,
+      filteredUsers: [],
       searchTerm: '',
     };
   }
 
   componentDidMount() {
-    //Send http request
+    // Send http request...
     this.setState({ filteredUsers: this.context.users });
   }
 
@@ -43,8 +38,12 @@ class UserFinder extends Component {
   render() {
     return (
       <Fragment>
-        <input type='search' onChange={this.searchChangeHandler.bind(this)} />
-        <Users users={this.state.filteredUsers} />
+        <div className={classes.finder}>
+          <input type='search' onChange={this.searchChangeHandler.bind(this)} />
+        </div>
+        {/* <ErrorBoundary>
+          <Users users={this.state.filteredUsers} />
+        </ErrorBoundary> */}
       </Fragment>
     );
   }
@@ -63,6 +62,15 @@ class UserFinder extends Component {
 //   const searchChangeHandler = (event) => {
 //     setSearchTerm(event.target.value);
 //   };
+
+//   return (
+//     <Fragment>
+//       <div className={classes.finder}>
+//         <input type='search' onChange={searchChangeHandler} />
+//       </div>
+//       <Users users={filteredUsers} />
+//     </Fragment>
+//   );
 // };
 
 export default UserFinder;
